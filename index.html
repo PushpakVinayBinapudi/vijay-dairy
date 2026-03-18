@@ -3,327 +3,462 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vijay Dairy — Farm Fresh. Pure. Natural.</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Vijay Dairy — Pure Farm Fresh Milk, Kakinada</title>
+<meta name="description" content="Vijay Dairy — Farm fresh milk, curd, ghee, paneer delivered daily in Kakinada, Andhra Pradesh. Pure, natural, chemical-free dairy.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --green: #1a6b3c;
-    --green-light: #2d9e5f;
-    --green-pale: #e8f5ee;
-    --green-dark: #0e4226;
-    --cream: #fdf8f0;
-    --cream-dark: #f5eddc;
-    --brown: #6b3f1a;
-    --text: #1a1a1a;
-    --text-muted: #5a6e5e;
-    --white: #ffffff;
-  }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --forest:#0d3d1f;--forest-mid:#1a5c32;--green:#2a8c50;--green-b:#3dba6e;
+  --sage:#7ab892;--mint:#c8ecd5;--cream:#faf6ee;--cream2:#f3ead8;--warm:#e8dcc4;
+  --gold:#c9973a;--gold-l:#f0c96a;--text:#1a1a14;--text2:#4a5240;
+}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+/* LOADER */
+.loader{position:fixed;inset:0;background:var(--forest);z-index:10000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;transition:opacity 0.8s,visibility 0.8s}
+.loader.hide{opacity:0;visibility:hidden}
+.loader-logo{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:#fff;letter-spacing:2px}
+.loader-logo em{color:var(--gold-l);font-style:italic}
+.loader-bar{width:200px;height:2px;background:rgba(255,255,255,0.15);border-radius:2px;overflow:hidden}
+.loader-fill{height:100%;width:0;background:linear-gradient(90deg,var(--green-b),var(--gold-l));animation:lfill 1.8s ease forwards}
+@keyframes lfill{to{width:100%}}
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(253,248,240,0.95); backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(26,107,60,0.15);
-    padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 70px;
-  }
-  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--green-dark); letter-spacing: -0.5px; }
-  .nav-logo span { color: var(--green-light); }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--green); }
-  .nav-cta { background: var(--green); color: white !important; padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 500 !important; transition: background 0.2s !important; }
-  .nav-cta:hover { background: var(--green-dark) !important; color: white !important; }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:72px;transition:all 0.4s}
+nav.scrolled{background:rgba(250,246,238,0.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,0.06)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;text-decoration:none;transition:color 0.4s}
+nav.scrolled .nav-logo{color:var(--forest)}
+.nav-logo em{color:var(--gold-l);font-style:italic}
+nav.scrolled .nav-logo em{color:var(--gold)}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,0.8);font-size:0.88rem;font-weight:400;transition:color 0.3s}
+nav.scrolled .nav-links a{color:var(--text2)}
+.nav-links a:hover{color:var(--green-b)!important}
+.nav-order{background:var(--gold);color:var(--forest)!important;padding:0.55rem 1.4rem;border-radius:50px;font-weight:600!important;transition:all 0.25s!important;box-shadow:0 4px 16px rgba(201,151,58,0.35)}
+.nav-order:hover{background:var(--gold-l)!important;transform:translateY(-1px)}
 
-  /* HERO */
-  #home { min-height: 100vh; background: var(--cream); display: flex; align-items: center; padding: 100px 5% 60px; position: relative; overflow: hidden; }
-  .hero-bg-circle { position: absolute; right: -10%; top: 50%; transform: translateY(-50%); width: 600px; height: 600px; background: radial-gradient(circle, var(--green-pale) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
-  .hero-dots { position: absolute; left: 5%; bottom: 10%; display: grid; grid-template-columns: repeat(6,14px); gap: 10px; opacity: 0.2; }
-  .hero-dots span { width: 6px; height: 6px; background: var(--green); border-radius: 50%; display: block; }
-  .hero-content { max-width: 600px; position: relative; z-index: 2; }
-  .hero-tag { display: inline-block; background: var(--green-pale); color: var(--green); font-size: 0.78rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 1.5rem; border: 1px solid rgba(26,107,60,0.2); }
-  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 900; line-height: 1.1; color: var(--green-dark); margin-bottom: 1.5rem; }
-  .hero-title em { font-style: italic; color: var(--green-light); }
-  .hero-sub { font-size: 1.1rem; font-weight: 300; color: var(--text-muted); line-height: 1.7; margin-bottom: 2.5rem; max-width: 480px; }
-  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn-primary { background: var(--green); color: white; border: none; padding: 0.9rem 2rem; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.25s; box-shadow: 0 4px 20px rgba(26,107,60,0.3); }
-  .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,107,60,0.4); }
-  .btn-wa { background: #25d366; color: white; border: none; padding: 0.9rem 2rem; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.25s; }
-  .btn-wa:hover { background: #1da851; transform: translateY(-2px); }
-  .btn-outline { background: transparent; color: var(--green); border: 2px solid var(--green); padding: 0.9rem 2rem; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.25s; }
-  .btn-outline:hover { background: var(--green); color: white; }
-  .hero-stats { display: flex; gap: 2.5rem; margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid rgba(26,107,60,0.15); }
-  .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--green); }
-  .stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
-  .hero-image-block { position: absolute; right: 5%; top: 50%; transform: translateY(-50%); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 420px; }
-  .hero-card { background: white; border-radius: 20px; padding: 1.5rem; box-shadow: 0 8px 32px rgba(0,0,0,0.08); text-align: center; transition: transform 0.3s; cursor: pointer; }
-  .hero-card:hover { transform: translateY(-4px); }
-  .hero-card:nth-child(2) { margin-top: 32px; }
-  .hero-card:nth-child(4) { margin-top: -32px; }
-  .hero-card-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
-  .hero-card-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--green-dark); }
-  .hero-card-price { font-size: 0.85rem; color: var(--green-light); font-weight: 500; margin-top: 3px; }
+/* HERO */
+#home{min-height:100vh;background:var(--forest);position:relative;overflow:hidden;display:flex;align-items:center}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 50%,rgba(42,140,80,0.18) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(201,151,58,0.1) 0%,transparent 50%),linear-gradient(135deg,#0d3d1f 0%,#0a2e17 60%,#061c0e 100%)}
+.hero-ring{position:absolute;right:-180px;top:50%;transform:translateY(-50%);width:650px;height:650px;border-radius:50%;border:1px solid rgba(42,140,80,0.18)}
+.hero-ring::before{content:'';position:absolute;inset:60px;border-radius:50%;border:1px solid rgba(42,140,80,0.12)}
+.hero-ring::after{content:'';position:absolute;inset:130px;border-radius:50%;border:1px solid rgba(201,151,58,0.08)}
+.hero-content{position:relative;z-index:2;padding:120px 5% 80px;max-width:680px}
+.hero-chip{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(42,140,80,0.15);border:1px solid rgba(42,140,80,0.3);color:var(--sage);font-size:0.73rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;padding:0.45rem 1.1rem;border-radius:50px;margin-bottom:2rem;opacity:0;animation:fup 0.8s 2s ease forwards}
+.hero-chip::before{content:'●';font-size:6px;color:var(--green-b)}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,7vw,5.8rem);font-weight:700;line-height:1.0;color:#fff;margin-bottom:1.8rem;opacity:0;animation:fup 0.9s 2.2s ease forwards}
+.hero-title em{font-style:italic;color:var(--gold-l);display:block}
+.hero-title .outline{-webkit-text-stroke:1px rgba(255,255,255,0.35);color:transparent}
+.hero-desc{font-size:1.05rem;font-weight:300;color:rgba(255,255,255,0.58);line-height:1.8;max-width:480px;margin-bottom:2.5rem;opacity:0;animation:fup 0.9s 2.4s ease forwards}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fup 0.9s 2.6s ease forwards}
+.btn-gold{background:var(--gold);color:var(--forest);padding:1rem 2.2rem;border-radius:50px;font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:600;text-decoration:none;display:inline-block;transition:all 0.3s;box-shadow:0 6px 28px rgba(201,151,58,0.4);border:none;cursor:pointer}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-3px);box-shadow:0 12px 36px rgba(201,151,58,0.55)}
+.btn-ghost{background:transparent;color:#fff;padding:1rem 2.2rem;border-radius:50px;font-size:0.95rem;font-weight:400;text-decoration:none;display:inline-flex;align-items:center;gap:0.6rem;border:1px solid rgba(255,255,255,0.25);transition:all 0.3s}
+.btn-ghost:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.5);transform:translateY(-2px)}
+.hero-stats{display:flex;gap:3rem;margin-top:4rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,0.08);opacity:0;animation:fup 0.9s 2.8s ease forwards}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:600;color:var(--gold-l);line-height:1}
+.stat-lbl{font-size:0.76rem;color:rgba(255,255,255,0.4);margin-top:4px;letter-spacing:0.5px}
 
-  /* SECTIONS */
-  section { padding: 90px 5%; }
-  .section-tag { display: inline-block; background: var(--green-pale); color: var(--green); font-size: 0.75rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 50px; margin-bottom: 1rem; }
-  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; color: var(--green-dark); line-height: 1.2; margin-bottom: 1rem; }
-  .section-sub { color: var(--text-muted); font-size: 1.05rem; font-weight: 300; max-width: 520px; line-height: 1.7; }
+/* Float cards */
+.hero-floats{position:absolute;right:5%;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;z-index:2}
+.fc{background:rgba(255,255,255,0.05);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:1.1rem 1.4rem;display:flex;align-items:center;gap:0.9rem;min-width:195px;opacity:0;transition:all 0.3s}
+.fc:hover{background:rgba(255,255,255,0.1);transform:translateX(-6px)}
+.fc:nth-child(1){animation:sleft 0.7s 2.8s ease forwards}
+.fc:nth-child(2){animation:sleft 0.7s 3.0s ease forwards;margin-left:28px}
+.fc:nth-child(3){animation:sleft 0.7s 3.2s ease forwards}
+.fc:nth-child(4){animation:sleft 0.7s 3.4s ease forwards;margin-left:28px}
+.fc-icon{font-size:1.9rem}
+.fc-name{font-size:0.88rem;font-weight:500;color:#fff}
+.fc-price{font-size:0.78rem;color:var(--gold-l);margin-top:2px}
 
-  /* PRODUCTS */
-  #products { background: white; }
-  .products-header { margin-bottom: 3rem; }
-  .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-  .product-card { background: var(--cream); border-radius: 24px; padding: 2rem; border: 1px solid rgba(26,107,60,0.1); transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden; }
-  .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--green), var(--green-light)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
-  .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(26,107,60,0.12); }
-  .product-card:hover::before { transform: scaleX(1); }
-  .product-emoji { font-size: 3rem; margin-bottom: 1rem; }
-  .product-name { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--green-dark); margin-bottom: 0.5rem; }
-  .product-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.2rem; }
-  .product-footer { display: flex; justify-content: space-between; align-items: center; }
-  .product-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--green); }
-  .product-btn { background: var(--green); color: white; border: none; padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.85rem; cursor: pointer; font-family: 'DM Sans', sans-serif; font-weight: 500; transition: background 0.2s; text-decoration: none; }
-  .product-btn:hover { background: var(--green-dark); }
+@keyframes fup{to{opacity:1;transform:translateY(0)}}
+@keyframes sleft{to{opacity:1}}
+.hero-chip,.hero-title,.hero-desc,.hero-btns,.hero-stats{transform:translateY(20px)}
 
-  /* SUBSCRIPTION */
-  #subscription { background: var(--green-dark); }
-  #subscription .section-title { color: white; }
-  #subscription .section-tag { background: rgba(255,255,255,0.15); color: #a8d8b4; }
-  #subscription .section-sub { color: rgba(255,255,255,0.65); }
-  .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
-  .plan-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 28px; padding: 2.5rem; transition: all 0.3s; position: relative; }
-  .plan-card.popular { background: white; border-color: white; }
-  .plan-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--green-light); color: white; font-size: 0.75rem; font-weight: 500; padding: 0.3rem 1rem; border-radius: 50px; letter-spacing: 1px; text-transform: uppercase; }
-  .plan-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 0.5rem; }
-  .plan-card.popular .plan-name { color: var(--green-dark); }
-  .plan-amount { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: white; line-height: 1; margin: 1rem 0 0.3rem; }
-  .plan-card.popular .plan-amount { color: var(--green); }
-  .plan-period { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 1.5rem; }
-  .plan-card.popular .plan-period { color: var(--text-muted); }
-  .plan-features { list-style: none; margin-bottom: 2rem; }
-  .plan-features li { padding: 0.5rem 0; font-size: 0.9rem; color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 0.6rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
-  .plan-card.popular .plan-features li { color: var(--text-muted); border-color: rgba(0,0,0,0.06); }
-  .plan-features li::before { content: '✓'; color: var(--green-light); font-weight: 700; }
-  .plan-card.popular .plan-features li::before { color: var(--green); }
-  .plan-btn { display: block; width: 100%; text-align: center; background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 0.85rem; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.2s; }
-  .plan-card.popular .plan-btn { background: var(--green); border-color: var(--green); }
-  .plan-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+/* TICKER */
+.ticker{background:var(--gold);padding:0.7rem 0;overflow:hidden;white-space:nowrap}
+.ticker-track{display:inline-flex;animation:tick 22s linear infinite}
+.ticker-track span{font-size:0.82rem;font-weight:600;color:var(--forest);padding:0 2rem;letter-spacing:0.5px}
+.ticker-track span::after{content:' ✦ ';opacity:0.45}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  /* ABOUT */
-  #about { background: var(--cream); }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 1rem; }
-  .about-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .about-tile { background: white; border-radius: 20px; padding: 1.5rem; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform 0.3s; }
-  .about-tile:hover { transform: translateY(-4px); }
-  .about-tile:nth-child(2) { margin-top: 24px; }
-  .about-tile-icon { font-size: 2rem; margin-bottom: 0.5rem; }
-  .about-tile-label { font-size: 0.85rem; font-weight: 500; color: var(--green-dark); }
-  .about-points { margin-top: 2rem; }
-  .about-point { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
-  .about-icon { width: 44px; height: 44px; flex-shrink: 0; background: var(--green-pale); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-  .about-point-title { font-weight: 500; color: var(--green-dark); margin-bottom: 0.3rem; }
-  .about-point-text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+/* GENERIC SECTION */
+section{padding:100px 5%}
+.tag{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.72rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:1.2rem}
+.tag::before{content:'';width:24px;height:1px;background:var(--green)}
+.h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4vw,3.4rem);font-weight:700;line-height:1.15;color:var(--forest);margin-bottom:1.2rem}
+.h2 em{font-style:italic;color:var(--green)}
+.lead{font-size:1rem;font-weight:300;color:var(--text2);line-height:1.8;max-width:540px}
 
-  /* CONTACT */
-  #contact { background: white; }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: start; }
-  .contact-info-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
-  .contact-icon { width: 48px; height: 48px; flex-shrink: 0; background: var(--green-pale); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
-  .contact-info-title { font-weight: 500; color: var(--green-dark); margin-bottom: 0.2rem; }
-  .contact-info-text { font-size: 0.9rem; color: var(--text-muted); }
-  .contact-form { background: var(--cream); border-radius: 24px; padding: 2rem; border: 1px solid rgba(26,107,60,0.1); }
-  .contact-form h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--green-dark); margin-bottom: 1.5rem; }
-  .form-group { margin-bottom: 1.2rem; }
-  .form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); margin-bottom: 0.5rem; }
-  .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.75rem 1rem; border: 1px solid rgba(26,107,60,0.2); border-radius: 12px; background: white; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text); outline: none; transition: border-color 0.2s; }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--green); }
-  .form-group textarea { resize: vertical; min-height: 100px; }
+/* FEATURES */
+#features{background:var(--forest);padding:60px 5%}
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.feat-item{padding:2.5rem 2rem;border-right:1px solid rgba(255,255,255,0.06);transition:background 0.3s}
+.feat-item:last-child{border-right:none}
+.feat-item:hover{background:rgba(255,255,255,0.04)}
+.feat-icon{font-size:2rem;margin-bottom:1rem}
+.feat-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:#fff;margin-bottom:0.5rem}
+.feat-text{font-size:0.84rem;color:rgba(255,255,255,0.42);line-height:1.7}
 
-  /* FOOTER */
-  footer { background: var(--green-dark); color: rgba(255,255,255,0.7); padding: 3rem 5% 2rem; text-align: center; }
-  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: white; margin-bottom: 1rem; }
-  .footer-logo span { color: #7dd8a0; }
-  .footer-tagline { font-size: 0.9rem; margin-bottom: 1.5rem; opacity: 0.6; }
-  .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
-  .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
-  .footer-links a:hover { color: white; }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; font-size: 0.8rem; opacity: 0.5; }
+/* PRODUCTS */
+#products{background:var(--cream)}
+.prod-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem;flex-wrap:wrap;gap:1rem}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.prod-card{background:#fff;border-radius:28px;overflow:hidden;border:1px solid rgba(0,0,0,0.05);transition:all 0.4s cubic-bezier(0.23,1,0.32,1)}
+.prod-card:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(13,61,31,0.15)}
+.prod-top{background:linear-gradient(135deg,var(--mint) 0%,var(--cream2) 100%);padding:2.5rem;text-align:center;position:relative}
+.prod-badge{position:absolute;top:1rem;right:1rem;background:var(--gold);color:var(--forest);font-size:0.68rem;font-weight:700;padding:0.3rem 0.7rem;border-radius:50px;letter-spacing:0.5px}
+.prod-emoji{font-size:4rem;display:block;margin-bottom:0.3rem}
+.prod-body{padding:1.5rem 1.8rem 1.8rem}
+.prod-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--forest);margin-bottom:0.5rem}
+.prod-desc{font-size:0.87rem;color:var(--text2);line-height:1.7;margin-bottom:1.2rem}
+.prod-foot{display:flex;justify-content:space-between;align-items:center}
+.prod-price{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--forest)}
+.prod-price span{font-size:0.88rem;font-weight:400;color:var(--text2);font-family:'Outfit',sans-serif}
+.obtn{background:var(--forest);color:#fff;padding:0.6rem 1.3rem;border-radius:50px;font-size:0.82rem;font-weight:500;text-decoration:none;transition:all 0.25s;border:none;cursor:pointer;display:inline-block}
+.obtn:hover{background:var(--green);transform:scale(1.05)}
 
-  /* WHATSAPP FLOAT */
-  .wa-float { position: fixed; bottom: 28px; right: 28px; width: 58px; height: 58px; border-radius: 50%; background: #25d366; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 24px rgba(37,211,102,0.5); z-index: 200; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; animation: pulse 2.5s infinite; }
-  .wa-float:hover { transform: scale(1.1); box-shadow: 0 10px 32px rgba(37,211,102,0.6); }
-  .wa-float svg { width: 30px; height: 30px; fill: white; }
+/* SUBSCRIPTION */
+#subscription{background:linear-gradient(160deg,var(--forest) 0%,#061c0e 100%);position:relative;overflow:hidden}
+#subscription::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(42,140,80,0.12) 0%,transparent 70%);border-radius:50%}
+.sub-head{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:4rem}
+.sub-head .h2{color:#fff}
+.sub-head .h2 em{color:var(--gold-l)}
+.sub-head .lead{color:rgba(255,255,255,0.52)}
+.perks{display:flex;flex-direction:column;gap:1rem}
+.perk{display:flex;align-items:center;gap:1rem;color:rgba(255,255,255,0.68);font-size:0.9rem}
+.perk-dot{width:8px;height:8px;background:var(--green-b);border-radius:50%;flex-shrink:0}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.plan{border:1px solid rgba(255,255,255,0.1);border-radius:28px;padding:2.5rem;transition:all 0.3s;position:relative;background:rgba(255,255,255,0.04)}
+.plan:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);transform:translateY(-4px)}
+.plan.hot{background:#fff;border-color:#fff}
+.plan.hot:hover{transform:translateY(-8px);box-shadow:0 30px 60px rgba(0,0,0,0.3)}
+.plan-chip{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--forest);font-size:0.7rem;font-weight:700;padding:0.3rem 1rem;border-radius:50px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.plan-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:0.5rem}
+.plan.hot .plan-name{color:var(--forest)}
+.plan-price{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:700;color:var(--gold-l);line-height:1;margin:1rem 0 0.3rem}
+.plan.hot .plan-price{color:var(--forest)}
+.plan-mo{font-size:0.82rem;color:rgba(255,255,255,0.38);margin-bottom:1.8rem}
+.plan.hot .plan-mo{color:var(--text2)}
+.plan-list{list-style:none;margin-bottom:2rem}
+.plan-list li{display:flex;align-items:center;gap:0.7rem;padding:0.55rem 0;font-size:0.87rem;color:rgba(255,255,255,0.58);border-bottom:1px solid rgba(255,255,255,0.05)}
+.plan.hot .plan-list li{color:var(--text2);border-color:rgba(0,0,0,0.05)}
+.plan-list li::before{content:'✓';color:var(--green-b);font-weight:700;flex-shrink:0}
+.plan.hot .plan-list li::before{color:var(--green)}
+.plan-cta{display:block;width:100%;text-align:center;padding:0.9rem;border-radius:50px;font-size:0.9rem;font-weight:600;text-decoration:none;transition:all 0.25s;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2)}
+.plan.hot .plan-cta{background:var(--forest);color:#fff;border-color:var(--forest)}
+.plan-cta:hover{opacity:0.85;transform:translateY(-2px)}
 
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.5); }
-    50% { box-shadow: 0 6px 40px rgba(37,211,102,0.75); }
-  }
+/* TESTIMONIALS */
+#testimonials{background:#fff}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.tcard{background:var(--cream);border-radius:24px;padding:2rem;border:1px solid rgba(0,0,0,0.04);transition:all 0.3s}
+.tcard:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(13,61,31,0.08)}
+.tq{font-family:'Cormorant Garamond',serif;font-size:3rem;color:var(--mint);line-height:1;margin-bottom:0.8rem}
+.ttext{font-size:0.9rem;color:var(--text2);line-height:1.75;margin-bottom:1.3rem;font-style:italic}
+.tstars{color:var(--gold);font-size:0.85rem;margin-bottom:1rem;letter-spacing:2px}
+.tauthor{display:flex;align-items:center;gap:0.8rem}
+.tavatar{width:40px;height:40px;border-radius:50%;background:var(--mint);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.tname{font-weight:600;font-size:0.88rem;color:var(--forest)}
+.tloc{font-size:0.76rem;color:var(--text2)}
 
-  /* ANIMATIONS */
-  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
+/* ABOUT */
+#about{background:var(--cream2)}
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:6rem;align-items:center}
+.about-img{background:linear-gradient(135deg,var(--forest) 0%,var(--forest-mid) 100%);border-radius:32px;padding:3rem;text-align:center;box-shadow:0 24px 56px rgba(13,61,31,0.25);position:relative}
+.about-img .big-e{font-size:6rem;display:block;margin-bottom:1rem}
+.about-img p{color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.7}
+.about-img strong{color:var(--gold-l);font-weight:600}
+.about-badge{position:absolute;bottom:-20px;right:-20px;background:var(--gold);border-radius:20px;padding:1.2rem 1.5rem;box-shadow:0 12px 32px rgba(201,151,58,0.4)}
+.about-badge .bnum{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--forest)}
+.about-badge .blbl{font-size:0.76rem;color:var(--forest);opacity:0.7}
+.pts{display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem}
+.pt{display:flex;gap:1.2rem}
+.pt-icon{width:48px;height:48px;flex-shrink:0;background:var(--mint);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.pt-title{font-weight:600;color:var(--forest);margin-bottom:0.3rem;font-size:0.95rem}
+.pt-text{font-size:0.86rem;color:var(--text2);line-height:1.7}
 
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .hero-image-block { display: none; }
-    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .hero-stats { gap: 1.5rem; }
-  }
-  @media (max-width: 600px) {
-    nav { padding: 0 4%; }
-    .nav-links { display: none; }
-    section { padding: 70px 4%; }
-    .hero-btns { flex-direction: column; }
-    .btn-primary, .btn-wa, .btn-outline { text-align: center; }
-  }
+/* DELIVERY */
+#delivery{background:var(--forest);padding:80px 5%}
+.del-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.del-grid .h2{color:#fff}
+.del-grid .h2 em{color:var(--gold-l)}
+.del-grid .lead{color:rgba(255,255,255,0.52);margin-bottom:2rem}
+.dtags{display:flex;flex-wrap:wrap;gap:0.7rem}
+.dtag{background:rgba(42,140,80,0.15);border:1px solid rgba(42,140,80,0.3);color:var(--sage);padding:0.5rem 1rem;border-radius:50px;font-size:0.82rem}
+.dtimes{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.dtime{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:1.5rem;text-align:center}
+.dtime-icon{font-size:2rem;margin-bottom:0.5rem}
+.dtime-val{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--gold-l)}
+.dtime-lbl{font-size:0.76rem;color:rgba(255,255,255,0.38);margin-top:4px}
 
-  .toast { position: fixed; bottom: 100px; right: 28px; background: var(--green-dark); color: white; padding: 0.8rem 1.4rem; border-radius: 12px; font-size: 0.9rem; font-weight: 500; opacity: 0; transform: translateY(10px); transition: all 0.3s; pointer-events: none; z-index: 300; }
-  .toast.show { opacity: 1; transform: translateY(0); }
+/* CONTACT */
+#contact{background:var(--cream)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;margin-top:3rem}
+.ccards{display:flex;flex-direction:column;gap:1rem;margin-top:2.5rem}
+.ccard{display:flex;align-items:center;gap:1.2rem;background:#fff;border-radius:18px;padding:1.2rem 1.5rem;border:1px solid rgba(0,0,0,0.05);transition:all 0.3s;text-decoration:none}
+.ccard:hover{transform:translateX(6px);box-shadow:0 8px 24px rgba(13,61,31,0.1);border-color:var(--mint)}
+.ccard-icon{width:48px;height:48px;flex-shrink:0;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.ci-p{background:#e8f5ee}.ci-w{background:#e7f9ef}.ci-m{background:#fff3e0}.ci-l{background:#fce8e8}
+.ccard-lbl{font-size:0.76rem;color:var(--text2);margin-bottom:2px}
+.ccard-val{font-weight:600;color:var(--forest);font-size:0.94rem}
+.cform{background:#fff;border-radius:28px;padding:2.5rem;border:1px solid rgba(0,0,0,0.05);box-shadow:0 8px 32px rgba(0,0,0,0.04)}
+.cform h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--forest);margin-bottom:0.4rem}
+.cform .sub{font-size:0.87rem;color:var(--text2);margin-bottom:2rem}
+.fg{margin-bottom:1.1rem}
+.fg label{display:block;font-size:0.78rem;font-weight:600;color:var(--text2);letter-spacing:0.5px;margin-bottom:0.5rem;text-transform:uppercase}
+.fg input,.fg select,.fg textarea{width:100%;padding:0.85rem 1.1rem;border:1.5px solid rgba(0,0,0,0.08);border-radius:14px;font-family:'Outfit',sans-serif;font-size:0.92rem;color:var(--text);background:var(--cream);outline:none;transition:all 0.25s;appearance:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--green);background:#fff;box-shadow:0 0 0 4px rgba(42,140,80,0.08)}
+.fg textarea{resize:vertical;min-height:90px}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.sbtn{width:100%;padding:1rem;background:var(--forest);color:#fff;border:none;border-radius:14px;font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.3s;margin-top:0.5rem}
+.sbtn:hover{background:var(--green);transform:translateY(-2px);box-shadow:0 8px 24px rgba(42,140,80,0.3)}
+
+/* FOOTER */
+footer{background:#040f07;padding:5rem 5% 2.5rem}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:4rem}
+.fbrand{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:#fff;margin-bottom:1rem}
+.fbrand em{color:var(--gold-l);font-style:italic}
+.fdesc{font-size:0.87rem;color:rgba(255,255,255,0.38);line-height:1.8;margin-bottom:1.5rem}
+.fsocial{display:flex;gap:0.8rem}
+.fsoc{width:38px;height:38px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.45);font-size:0.9rem;text-decoration:none;transition:all 0.25s}
+.fsoc:hover{background:var(--green);border-color:var(--green);color:#fff}
+.fcol-title{font-size:0.78rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:1.2rem}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:0.7rem}
+.flinks a{text-decoration:none;color:rgba(255,255,255,0.45);font-size:0.87rem;transition:color 0.2s}
+.flinks a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:2rem;display:flex;justify-content:space-between;align-items:center}
+.fcopy{font-size:0.78rem;color:rgba(255,255,255,0.22)}
+
+/* WA FLOAT */
+.wafab{position:fixed;bottom:28px;right:28px;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:0.8rem}
+.wabtn{width:60px;height:60px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(37,211,102,0.45);text-decoration:none;animation:wap 2.5s infinite;transition:transform 0.2s}
+.wabtn:hover{transform:scale(1.1)}
+.wabtn svg{width:28px;height:28px;fill:#fff}
+.watooltip{background:var(--forest);color:#fff;font-size:0.76rem;font-weight:500;padding:0.5rem 1rem;border-radius:50px;white-space:nowrap;opacity:0;transform:translateX(10px);transition:all 0.3s;pointer-events:none}
+.wafab:hover .watooltip{opacity:1;transform:translateX(0)}
+@keyframes wap{0%,100%{box-shadow:0 8px 28px rgba(37,211,102,0.45)}50%{box-shadow:0 8px 48px rgba(37,211,102,0.7)}}
+
+/* REVEAL */
+.rev{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.rev.show{opacity:1;transform:translateY(0)}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}.d4{transition-delay:0.4s}
+
+/* TOAST */
+.toast{position:fixed;bottom:108px;right:28px;background:var(--forest);color:#fff;padding:0.9rem 1.5rem;border-radius:14px;font-size:0.87rem;font-weight:500;opacity:0;transform:translateY(8px);transition:all 0.3s;pointer-events:none;z-index:600;border-left:3px solid var(--green-b)}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.prod-grid{grid-template-columns:repeat(2,1fr)}.feat-grid{grid-template-columns:repeat(2,1fr)}.footer-top{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.hero-floats{display:none}.sub-head,.about-grid,.contact-grid,.del-grid{grid-template-columns:1fr;gap:2.5rem}.plans,.testi-grid,.prod-grid{grid-template-columns:1fr}.feat-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){nav{padding:0 4%}.nav-links{display:none!important}section{padding:70px 4%}.hero-btns{flex-direction:column}.hero-stats{gap:1.5rem}.feat-grid{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr}.footer-bottom{flex-direction:column;gap:0.5rem;text-align:center}.fg2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-logo">Vijay <em>Dairy</em></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
 <!-- NAV -->
-<nav>
-  <div class="nav-logo">Vijay <span>Dairy</span></div>
+<nav id="nav">
+  <a href="#home" class="nav-logo">Vijay <em>Dairy</em></a>
   <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
     <li><a href="#products">Products</a></li>
     <li><a href="#subscription">Subscribe</a></li>
-    <li><a href="#about">About Us</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#contact" class="nav-cta">Order Now</a></li>
+    <li><a href="https://wa.me/917337432223?text=Hello%20Vijay%20Dairy!%20I%20want%20to%20order." class="nav-order" target="_blank">Order Now</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="home">
-  <div class="hero-bg-circle"></div>
-  <div class="hero-dots">
-    <span></span><span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span><span></span>
-  </div>
-  <div class="hero-content fade-up">
-    <div class="hero-tag">🌿 Andhra Pradesh's Trusted Dairy</div>
-    <h1 class="hero-title">Farm Fresh Milk,<br><em>Delivered Every</em><br>Morning 🥛</h1>
-    <p class="hero-sub">Pure. Natural. Straight from our farm to your family's table — no preservatives, no mixing, no compromise.</p>
+  <div class="hero-bg"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-content">
+    <div class="hero-chip">Kakinada, Andhra Pradesh</div>
+    <h1 class="hero-title">
+      Farm Fresh.<br>
+      <em>Pure & Natural.</em>
+      <span class="outline">Every Morning.</span>
+    </h1>
+    <p class="hero-desc">Pure farm milk, curd, ghee and more — delivered straight from our farm to your doorstep before sunrise, every single day.</p>
     <div class="hero-btns">
-      <a href="#subscription" class="btn-primary">Subscribe for Daily Delivery</a>
-      <a href="https://wa.me/917337432223?text=Hello%20Vijay%20Dairy!%20I%27m%20interested%20in%20ordering." class="btn-wa" target="_blank">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Order on WhatsApp
+      <a href="#subscription" class="btn-gold">Start Daily Subscription</a>
+      <a href="https://wa.me/917337432223?text=Hello%20Vijay%20Dairy!" class="btn-ghost" target="_blank">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Us
       </a>
     </div>
     <div class="hero-stats">
-      <div><div class="stat-num">500+</div><div class="stat-label">Happy Families</div></div>
-      <div><div class="stat-num">100%</div><div class="stat-label">Pure & Natural</div></div>
-      <div><div class="stat-num">6 AM</div><div class="stat-label">Daily Delivery</div></div>
+      <div><div class="stat-num">500+</div><div class="stat-lbl">Happy Families</div></div>
+      <div><div class="stat-num">100%</div><div class="stat-lbl">Pure & Natural</div></div>
+      <div><div class="stat-num">5+</div><div class="stat-lbl">Years Serving</div></div>
+      <div><div class="stat-num">6 AM</div><div class="stat-lbl">Daily Delivery</div></div>
     </div>
   </div>
-  <div class="hero-image-block">
-    <div class="hero-card fade-up"><div class="hero-card-icon">🥛</div><div class="hero-card-name">Fresh Milk</div><div class="hero-card-price">₹50/litre</div></div>
-    <div class="hero-card fade-up"><div class="hero-card-icon">🫙</div><div class="hero-card-name">Pure Curd</div><div class="hero-card-price">₹60/kg</div></div>
-    <div class="hero-card fade-up"><div class="hero-card-icon">🧈</div><div class="hero-card-name">Desi Ghee</div><div class="hero-card-price">₹600/L</div></div>
-    <div class="hero-card fade-up"><div class="hero-card-icon">🧀</div><div class="hero-card-name">Paneer</div><div class="hero-card-price">Fresh Daily</div></div>
+  <div class="hero-floats">
+    <div class="fc"><div class="fc-icon">🥛</div><div><div class="fc-name">Fresh Cow Milk</div><div class="fc-price">₹50 / litre</div></div></div>
+    <div class="fc"><div class="fc-icon">🫙</div><div><div class="fc-name">Pure Curd</div><div class="fc-price">₹60 / kg</div></div></div>
+    <div class="fc"><div class="fc-icon">🧈</div><div><div class="fc-name">Desi Ghee</div><div class="fc-price">₹600 / litre</div></div></div>
+    <div class="fc"><div class="fc-icon">🧀</div><div><div class="fc-name">Fresh Paneer</div><div class="fc-price">Made Daily</div></div></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Pure Cow Milk</span><span>Fresh Curd Daily</span><span>Desi Ghee</span><span>Farm Fresh Paneer</span><span>Chilled Buttermilk</span><span>Rich Khova</span><span>Home Delivery</span><span>No Preservatives</span><span>100% Natural</span><span>Kakinada's Trusted Dairy</span>
+    <span>Pure Cow Milk</span><span>Fresh Curd Daily</span><span>Desi Ghee</span><span>Farm Fresh Paneer</span><span>Chilled Buttermilk</span><span>Rich Khova</span><span>Home Delivery</span><span>No Preservatives</span><span>100% Natural</span><span>Kakinada's Trusted Dairy</span>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="feat-grid">
+    <div class="feat-item rev"><div class="feat-icon">🌿</div><div class="feat-title">100% Pure & Natural</div><div class="feat-text">No water mixing. No powder. No chemicals. Just pure milk as nature made it — tested daily at our farm.</div></div>
+    <div class="feat-item rev d1"><div class="feat-icon">🚜</div><div class="feat-title">Farm to Doorstep</div><div class="feat-text">Collected fresh every morning and delivered within hours. No middlemen, no delay, no compromise.</div></div>
+    <div class="feat-item rev d2"><div class="feat-icon">⏰</div><div class="feat-title">Before 6:30 AM Daily</div><div class="feat-text">Your milk arrives before you wake up. Consistent, reliable delivery every single day — rain or shine.</div></div>
+    <div class="feat-item rev d3"><div class="feat-icon">❤️</div><div class="feat-title">Happy & Healthy Cows</div><div class="feat-text">Our cows eat natural green fodder and live healthy lives. Happy cows produce the richest milk.</div></div>
   </div>
 </section>
 
 <!-- PRODUCTS -->
 <section id="products">
-  <div class="products-header fade-up">
-    <div class="section-tag">Our Products</div>
-    <h2 class="section-title">Pure Dairy, Every Day</h2>
-    <p class="section-sub">All products made fresh at our farm daily. No preservatives. No additives. Just pure, honest dairy.</p>
+  <div class="prod-head">
+    <div>
+      <div class="tag rev">Our Products</div>
+      <h2 class="h2 rev">Fresh from <em>Our Farm</em><br>to Your Table</h2>
+    </div>
+    <a href="https://wa.me/917337432223?text=I'd like to place an order" class="btn-gold rev" target="_blank">Order on WhatsApp</a>
   </div>
-  <div class="products-grid">
-    <div class="product-card fade-up">
-      <div class="product-emoji">🥛</div>
-      <div class="product-name">Fresh Cow Milk</div>
-      <div class="product-desc">Collected fresh every morning. No water added, no powder mixed. Rich in natural calcium and vitamins. Pure as nature intended.</div>
-      <div class="product-footer"><div class="product-price">₹50/L</div><a href="https://wa.me/917337432223?text=I'd like to order Fresh Milk" class="product-btn" target="_blank">Order Now</a></div>
+  <div class="prod-grid">
+    <div class="prod-card rev">
+      <div class="prod-top"><div class="prod-badge">Best Seller</div><span class="prod-emoji">🥛</span></div>
+      <div class="prod-body">
+        <div class="prod-name">Fresh Cow Milk</div>
+        <div class="prod-desc">Collected every morning — rich, creamy, full of natural nutrients. Zero adulteration guaranteed.</div>
+        <div class="prod-foot"><div class="prod-price">₹50 <span>/ litre</span></div><a href="https://wa.me/917337432223?text=I'd like to order Fresh Milk" class="obtn" target="_blank">Order Now</a></div>
+      </div>
     </div>
-    <div class="product-card fade-up">
-      <div class="product-emoji">🫙</div>
-      <div class="product-name">Fresh Curd (Perugu)</div>
-      <div class="product-desc">Thick, creamy curd set naturally from our farm milk. No artificial cultures. Perfect with rice, roti, or as a refreshing drink.</div>
-      <div class="product-footer"><div class="product-price">₹60/kg</div><a href="https://wa.me/917337432223?text=I'd like to order Fresh Curd" class="product-btn" target="_blank">Order Now</a></div>
+    <div class="prod-card rev d1">
+      <div class="prod-top"><span class="prod-emoji">🫙</span></div>
+      <div class="prod-body">
+        <div class="prod-name">Fresh Curd (Perugu)</div>
+        <div class="prod-desc">Naturally set, thick and creamy. No artificial cultures. Traditional taste, every single time.</div>
+        <div class="prod-foot"><div class="prod-price">₹60 <span>/ kg</span></div><a href="https://wa.me/917337432223?text=I'd like to order Curd" class="obtn" target="_blank">Order Now</a></div>
+      </div>
     </div>
-    <div class="product-card fade-up">
-      <div class="product-emoji">🧈</div>
-      <div class="product-name">Pure Desi Ghee</div>
-      <div class="product-desc">Made using the traditional bilona method. Rich golden ghee with heavenly aroma. No vegetable oil, no adulteration — 100% pure cow ghee.</div>
-      <div class="product-footer"><div class="product-price">₹600/L</div><a href="https://wa.me/917337432223?text=I'd like to order Desi Ghee" class="product-btn" target="_blank">Order Now</a></div>
+    <div class="prod-card rev d2">
+      <div class="prod-top"><div class="prod-badge">Premium</div><span class="prod-emoji">🧈</span></div>
+      <div class="prod-body">
+        <div class="prod-name">Pure Desi Ghee</div>
+        <div class="prod-desc">Traditional bilona method. Golden, aromatic, pure cow ghee — no vegetable oil, no shortcuts.</div>
+        <div class="prod-foot"><div class="prod-price">₹600 <span>/ litre</span></div><a href="https://wa.me/917337432223?text=I'd like to order Ghee" class="obtn" target="_blank">Order Now</a></div>
+      </div>
     </div>
-    <div class="product-card fade-up">
-      <div class="product-emoji">🧀</div>
-      <div class="product-name">Fresh Paneer</div>
-      <div class="product-desc">Soft, fresh paneer made daily from pure Vijay Dairy milk. Firm texture, mild flavour. Perfect for curries, grilling, or eating fresh.</div>
-      <div class="product-footer"><div class="product-price">On Request</div><a href="https://wa.me/917337432223?text=I'd like to order Paneer" class="product-btn" target="_blank">Order Now</a></div>
+    <div class="prod-card rev">
+      <div class="prod-top"><span class="prod-emoji">🧀</span></div>
+      <div class="prod-body">
+        <div class="prod-name">Fresh Paneer</div>
+        <div class="prod-desc">Made daily from pure farm milk. Soft, firm, incredibly fresh — ideal for all your favourite dishes.</div>
+        <div class="prod-foot"><div class="prod-price" style="font-size:1.1rem;padding-top:4px">On Request</div><a href="https://wa.me/917337432223?text=I'd like to order Paneer" class="obtn" target="_blank">Order Now</a></div>
+      </div>
     </div>
-    <div class="product-card fade-up">
-      <div class="product-emoji">🥤</div>
-      <div class="product-name">Buttermilk (Majjiga)</div>
-      <div class="product-desc">The classic Andhra coolant — lightly spiced with ginger, green chilli, and curry leaves. Refreshing, digestive, and utterly delicious.</div>
-      <div class="product-footer"><div class="product-price">On Request</div><a href="https://wa.me/917337432223?text=I'd like to order Buttermilk" class="product-btn" target="_blank">Order Now</a></div>
+    <div class="prod-card rev d1">
+      <div class="prod-top"><span class="prod-emoji">🥤</span></div>
+      <div class="prod-body">
+        <div class="prod-name">Buttermilk (Majjiga)</div>
+        <div class="prod-desc">Classic Andhra spiced buttermilk — ginger, curry leaves, green chilli. The ultimate summer coolant.</div>
+        <div class="prod-foot"><div class="prod-price" style="font-size:1.1rem;padding-top:4px">On Request</div><a href="https://wa.me/917337432223?text=I'd like to order Buttermilk" class="obtn" target="_blank">Order Now</a></div>
+      </div>
     </div>
-    <div class="product-card fade-up">
-      <div class="product-emoji">🍮</div>
-      <div class="product-name">Khova / Mawa</div>
-      <div class="product-desc">Rich, thick mawa made by slowly simmering pure farm milk. Ideal for peda, barfi, halwa, and gulab jamun. Pure milk solids, no fillers.</div>
-      <div class="product-footer"><div class="product-price">On Request</div><a href="https://wa.me/917337432223?text=I'd like to order Khova" class="product-btn" target="_blank">Order Now</a></div>
+    <div class="prod-card rev d2">
+      <div class="prod-top"><span class="prod-emoji">🍮</span></div>
+      <div class="prod-body">
+        <div class="prod-name">Khova / Mawa</div>
+        <div class="prod-desc">Pure milk reduced to perfection. Ideal for peda, barfi, halwa. No starch, no fillers — 100% pure.</div>
+        <div class="prod-foot"><div class="prod-price" style="font-size:1.1rem;padding-top:4px">On Request</div><a href="https://wa.me/917337432223?text=I'd like to order Khova" class="obtn" target="_blank">Order Now</a></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- SUBSCRIPTION -->
 <section id="subscription">
-  <div class="fade-up">
-    <div class="section-tag">Daily Delivery Plans</div>
-    <h2 class="section-title">Subscribe & Never Run Out</h2>
-    <p class="section-sub">Fresh milk at your door every morning. No hassle. No worries. Just pure dairy, daily.</p>
+  <div class="sub-head">
+    <div>
+      <div class="tag rev" style="color:#7ab892">Daily Plans</div>
+      <h2 class="h2 rev">Never Run Out<br>of <em>Fresh Milk</em></h2>
+      <p class="lead rev">Subscribe once and get farm-fresh milk at your door every morning — automatically. No daily calls needed.</p>
+    </div>
+    <div class="perks rev">
+      <div class="perk"><div class="perk-dot"></div>Delivered by 6:30 AM daily</div>
+      <div class="perk"><div class="perk-dot"></div>Pause or cancel anytime</div>
+      <div class="perk"><div class="perk-dot"></div>100% pure, no adulteration</div>
+      <div class="perk"><div class="perk-dot"></div>WhatsApp support always available</div>
+      <div class="perk"><div class="perk-dot"></div>No long-term contract required</div>
+    </div>
   </div>
-  <div class="plans-grid">
-    <div class="plan-card fade-up">
-      <div class="plan-name">Half Litre Daily</div>
-      <div class="plan-amount">₹800</div>
-      <div class="plan-period">per month</div>
-      <ul class="plan-features">
-        <li>500 ml fresh milk every morning</li>
-        <li>Delivered by 6:30 AM daily</li>
-        <li>Best for 1–2 members</li>
-        <li>Pause or cancel anytime</li>
+  <div class="plans">
+    <div class="plan rev">
+      <div class="plan-name">Half Litre</div>
+      <div class="plan-price">₹800</div>
+      <div class="plan-mo">per month · 500ml daily</div>
+      <ul class="plan-list">
+        <li>500 ml fresh milk every morning</li><li>Delivered by 6:30 AM</li>
+        <li>Best for 1–2 members</li><li>Pause or cancel anytime</li>
       </ul>
-      <a href="https://wa.me/917337432223?text=I'd like the 500ml daily plan" class="plan-btn" target="_blank">Subscribe Now</a>
+      <a href="https://wa.me/917337432223?text=I'd like to subscribe to 500ml daily plan" class="plan-cta" target="_blank">Subscribe Now</a>
     </div>
-    <div class="plan-card popular fade-up">
-      <div class="plan-badge">Most Popular</div>
-      <div class="plan-name">Full Litre Daily</div>
-      <div class="plan-amount">₹1,500</div>
-      <div class="plan-period">per month</div>
-      <ul class="plan-features">
-        <li>1 litre fresh milk every morning</li>
-        <li>Delivered by 6:30 AM daily</li>
-        <li>Best for families of 3–5</li>
-        <li>Pause or cancel anytime</li>
+    <div class="plan hot rev d1">
+      <div class="plan-chip">Most Popular</div>
+      <div class="plan-name">Full Litre</div>
+      <div class="plan-price">₹1,500</div>
+      <div class="plan-mo">per month · 1 litre daily</div>
+      <ul class="plan-list">
+        <li>1 litre fresh milk every morning</li><li>Delivered by 6:30 AM</li>
+        <li>Best for families of 3–5</li><li>Pause or cancel anytime</li>
       </ul>
-      <a href="https://wa.me/917337432223?text=I'd like the 1L daily plan" class="plan-btn" target="_blank">Subscribe Now</a>
+      <a href="https://wa.me/917337432223?text=I'd like to subscribe to 1L daily plan" class="plan-cta" target="_blank">Subscribe Now</a>
     </div>
-    <div class="plan-card fade-up">
-      <div class="plan-name">Custom Order</div>
-      <div class="plan-amount" style="font-size:2rem;">Contact Us</div>
-      <div class="plan-period">for bulk / custom needs</div>
-      <ul class="plan-features">
-        <li>Bulk milk for businesses</li>
-        <li>Custom product combos</li>
-        <li>Ghee, curd, paneer bundles</li>
-        <li>Flexible scheduling</li>
+    <div class="plan rev d2">
+      <div class="plan-name">Custom / Bulk</div>
+      <div class="plan-price" style="font-size:2rem;margin-top:1rem">Call Us</div>
+      <div class="plan-mo">for restaurants & businesses</div>
+      <ul class="plan-list">
+        <li>Bulk milk supply daily</li><li>Curd, ghee, paneer combos</li>
+        <li>Custom delivery schedule</li><li>Special bulk pricing</li>
       </ul>
-      <a href="https://wa.me/917337432223?text=I'd like a custom dairy order" class="plan-btn" target="_blank">Talk to Us</a>
+      <a href="https://wa.me/917337432223?text=I need a custom dairy order" class="plan-cta" target="_blank">Talk to Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="tag rev">Customer Reviews</div>
+  <h2 class="h2 rev">Trusted by <em>500+ Families</em><br>in Kakinada</h2>
+  <div class="testi-grid">
+    <div class="tcard rev">
+      <div class="tq">"</div><div class="tstars">★★★★★</div>
+      <div class="ttext">We've been getting milk from Vijay Dairy for over 2 years. Always fresh, always pure. My children love it and I trust it completely!</div>
+      <div class="tauthor"><div class="tavatar">👩</div><div><div class="tname">Lakshmi Devi</div><div class="tloc">Pallam Raju Nagar, Kakinada</div></div></div>
+    </div>
+    <div class="tcard rev d1">
+      <div class="tq">"</div><div class="tstars">★★★★★</div>
+      <div class="ttext">The ghee from Vijay Dairy is absolutely pure. The golden colour and heavenly aroma — exactly like our village ghee. Highly recommended!</div>
+      <div class="tauthor"><div class="tavatar">👨</div><div><div class="tname">Ravi Kumar</div><div class="tloc">Suryaraopeta, Kakinada</div></div></div>
+    </div>
+    <div class="tcard rev d2">
+      <div class="tq">"</div><div class="tstars">★★★★★</div>
+      <div class="ttext">Not a single missed delivery in 18 months! Milk always arrives by 6 AM. The paneer is so fresh — I use it every day in my kitchen.</div>
+      <div class="tauthor"><div class="tavatar">👩</div><div><div class="tname">Sunitha Reddy</div><div class="tloc">Jagannaickpur, Kakinada</div></div></div>
     </div>
   </div>
 </section>
@@ -331,133 +466,168 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="about-grid">
-    <div class="about-visual fade-up">
-      <div class="about-tile"><div class="about-tile-icon">🐄</div><div class="about-tile-label">Healthy Cows</div></div>
-      <div class="about-tile"><div class="about-tile-icon">🌾</div><div class="about-tile-label">Natural Feed</div></div>
-      <div class="about-tile"><div class="about-tile-icon">🧪</div><div class="about-tile-label">Purity Tested</div></div>
-      <div class="about-tile"><div class="about-tile-icon">🚚</div><div class="about-tile-label">Daily Delivery</div></div>
-    </div>
-    <div class="fade-up">
-      <div class="section-tag">About Vijay Dairy</div>
-      <h2 class="section-title">Born from a Belief in Pure Milk</h2>
-      <p class="section-sub">We started Vijay Dairy in Andhra Pradesh with one simple mission — to bring genuinely fresh, chemical-free dairy products directly to your home. No middlemen. No processing. No compromise.</p>
-      <div class="about-points">
-        <div class="about-point">
-          <div class="about-icon">🚜</div>
-          <div><div class="about-point-title">Direct from Our Farm</div><div class="about-point-text">Milk is collected and delivered the same morning. No storage delays, no cold chain processing.</div></div>
-        </div>
-        <div class="about-point">
-          <div class="about-icon">✅</div>
-          <div><div class="about-point-title">100% Pure & Tested</div><div class="about-point-text">We never mix water, powder, or chemicals. Our milk is exactly what nature produced — nothing more, nothing less.</div></div>
-        </div>
-        <div class="about-point">
-          <div class="about-icon">❤️</div>
-          <div><div class="about-point-title">Happy Cows, Better Milk</div><div class="about-point-text">Every cow on our farm is well-fed, healthy, and cared for with love. Happy cows give the best milk.</div></div>
-        </div>
+    <div class="rev">
+      <div class="about-img">
+        <span class="big-e">🐄</span>
+        <p>Our cows are raised on <strong>natural green fodder</strong> and treated with great care. No hormones, no artificial feed — pure traditional dairy farming.</p>
+        <div class="about-badge"><div class="bnum">100%</div><div class="blbl">Adulteration Free</div></div>
       </div>
+    </div>
+    <div>
+      <div class="tag rev">Our Story</div>
+      <h2 class="h2 rev">Born from a <em>Passion</em><br>for Pure Dairy</h2>
+      <p class="lead rev">Vijay Dairy was founded with one belief — every family in Kakinada deserves honest, pure dairy. We started small with a few cows and a big dream. Today we serve hundreds of families, and our commitment to purity has never wavered.</p>
+      <div class="pts">
+        <div class="pt rev"><div class="pt-icon">🚜</div><div><div class="pt-title">Same Morning Delivery</div><div class="pt-text">Milk is collected and dispatched the same morning — no storage, no cold chain, no compromise on freshness.</div></div></div>
+        <div class="pt rev d1"><div class="pt-icon">🧪</div><div><div class="pt-title">Purity Guaranteed</div><div class="pt-text">We never mix water, powder, or chemicals. What leaves our farm is exactly what your family drinks.</div></div></div>
+        <div class="pt rev d2"><div class="pt-icon">🌿</div><div><div class="pt-title">Ethical & Sustainable</div><div class="pt-text">Our cows graze freely, eat natural fodder, and live healthy lives. Better animals mean better milk.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY -->
+<section id="delivery">
+  <div class="del-grid">
+    <div>
+      <div class="tag rev" style="color:#7ab892">Service Area</div>
+      <h2 class="h2 rev">Delivering Across<br><em>Kakinada Daily</em></h2>
+      <p class="lead rev">We cover a 10 km radius around Kakinada. If you're nearby, we deliver to your door every single morning!</p>
+      <div class="dtags rev">
+        <span class="dtag">Pallam Raju Nagar</span><span class="dtag">Jagannaickpur</span>
+        <span class="dtag">Suryaraopeta</span><span class="dtag">Ramanayyapeta</span>
+        <span class="dtag">Bhanugudi</span><span class="dtag">One Town</span>
+        <span class="dtag">& Nearby Areas</span>
+      </div>
+    </div>
+    <div class="dtimes rev">
+      <div class="dtime"><div class="dtime-icon">🌅</div><div class="dtime-val">5:00 AM</div><div class="dtime-lbl">Collection starts</div></div>
+      <div class="dtime"><div class="dtime-icon">🚚</div><div class="dtime-val">6:00 AM</div><div class="dtime-lbl">Delivery begins</div></div>
+      <div class="dtime"><div class="dtime-icon">🥛</div><div class="dtime-val">6:30 AM</div><div class="dtime-lbl">At your door</div></div>
+      <div class="dtime"><div class="dtime-icon">📍</div><div class="dtime-val">10 km</div><div class="dtime-lbl">Delivery radius</div></div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="fade-up" style="margin-bottom:2rem;">
-    <div class="section-tag">Contact Us</div>
-    <h2 class="section-title">We're Just a Message Away</h2>
-    <p class="section-sub">Reach out to place an order, subscribe, or ask any question. We respond quickly!</p>
-  </div>
+  <div class="tag rev">Get In Touch</div>
+  <h2 class="h2 rev">Order, Subscribe or<br><em>Just Say Hello</em></h2>
   <div class="contact-grid">
-    <div class="fade-up">
-      <div class="contact-info-item">
-        <div class="contact-icon">📞</div>
-        <div><div class="contact-info-title">Phone</div><div class="contact-info-text">+91 73374 32223 — Call us anytime</div></div>
+    <div>
+      <p class="lead rev">We're always just a call or WhatsApp away. Reach out to subscribe, place an order, or ask anything at all.</p>
+      <div class="ccards">
+        <a href="tel:+917337432223" class="ccard rev"><div class="ccard-icon ci-p">📞</div><div><div class="ccard-lbl">Phone</div><div class="ccard-val">+91 73374 32223</div></div></a>
+        <a href="https://wa.me/917337432223" class="ccard rev d1" target="_blank"><div class="ccard-icon ci-w">💬</div><div><div class="ccard-lbl">WhatsApp</div><div class="ccard-val">+91 73374 32223</div></div></a>
+        <a href="mailto:pushpakvinay1234@gmail.com" class="ccard rev d2"><div class="ccard-icon ci-m">📧</div><div><div class="ccard-lbl">Email</div><div class="ccard-val">pushpakvinay1234@gmail.com</div></div></a>
+        <div class="ccard rev d3"><div class="ccard-icon ci-l">📍</div><div><div class="ccard-lbl">Address</div><div class="ccard-val">Pallam Raju Nagar 2nd Street, Kakinada</div></div></div>
       </div>
-      <div class="contact-info-item">
-        <div class="contact-icon">💬</div>
-        <div><div class="contact-info-title">WhatsApp</div><div class="contact-info-text">+91 73374 32223 — Quickest way to order</div></div>
-      </div>
-      <div class="contact-info-item">
-        <div class="contact-icon">✉️</div>
-        <div><div class="contact-info-title">Email</div><div class="contact-info-text">pushpakvinay1234@gmail.com</div></div>
-      </div>
-      <div class="contact-info-item">
-        <div class="contact-icon">📍</div>
-        <div><div class="contact-info-title">Address</div><div class="contact-info-text">Pallam Raju Nagar 2nd Street, Kakinada</div></div>
-      </div>
-      <div class="contact-info-item">
-        <div class="contact-icon">🕕</div>
-        <div><div class="contact-info-title">Delivery Hours</div><div class="contact-info-text">Every morning, 6:00 AM – 8:00 AM</div></div>
-      </div>
-      <a href="https://wa.me/917337432223?text=Hello%20Vijay%20Dairy!" class="btn-wa" target="_blank" style="margin-top:1rem; display:inline-flex;">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Chat with us on WhatsApp
-      </a>
     </div>
-    <div class="contact-form fade-up">
-      <h3>Send us a Message</h3>
-      <div class="form-group"><label>Your Name</label><input type="text" placeholder="Enter your name" id="fname"></div>
-      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 73374 32223" id="fphone"></div>
-      <div class="form-group">
-        <label>I'm interested in</label>
-        <select id="fproduct">
-          <option value="">Select a product / plan</option>
-          <option>Fresh Milk — Daily subscription</option>
-          <option>Fresh Curd</option>
-          <option>Pure Desi Ghee</option>
+    <div class="cform rev">
+      <h3>Send an Enquiry</h3>
+      <p class="sub">Fill in your details — we'll reply on WhatsApp within minutes!</p>
+      <div class="fg2">
+        <div class="fg"><label>Your Name</label><input type="text" id="fn" placeholder="Enter your name"></div>
+        <div class="fg"><label>Phone Number</label><input type="tel" id="fp" placeholder="+91 XXXXX XXXXX"></div>
+      </div>
+      <div class="fg">
+        <label>I'm Interested In</label>
+        <select id="fi">
+          <option value="">Select a product or plan</option>
+          <option>Fresh Milk — Daily Subscription (1L) — ₹1500/month</option>
+          <option>Fresh Milk — Daily Subscription (500ml) — ₹800/month</option>
+          <option>Fresh Curd (Perugu) — ₹60/kg</option>
+          <option>Pure Desi Ghee — ₹600/litre</option>
           <option>Fresh Paneer</option>
-          <option>Buttermilk</option>
+          <option>Buttermilk (Majjiga)</option>
           <option>Khova / Mawa</option>
-          <option>Custom / Bulk order</option>
+          <option>Bulk / Business Order</option>
         </select>
       </div>
-      <div class="form-group"><label>Message (optional)</label><textarea placeholder="Tell us your requirements..."></textarea></div>
-      <button class="btn-primary" style="width:100%; border:none;" onclick="sendEnquiry()">Send Enquiry via WhatsApp</button>
+      <div class="fg"><label>Message (Optional)</label><textarea id="fm" placeholder="Any specific requirements or questions?"></textarea></div>
+      <button class="sbtn" onclick="submitForm()">Send via WhatsApp →</button>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Vijay <span>Dairy</span></div>
-  <div class="footer-tagline">Farm Fresh · Pure & Natural · Home Delivered — Andhra Pradesh</div>
-  <div class="footer-links">
-    <a href="#home">Home</a><a href="#products">Products</a>
-    <a href="#subscription">Subscribe</a><a href="#about">About Us</a><a href="#contact">Contact</a>
+  <div class="footer-top">
+    <div>
+      <div class="fbrand">Vijay <em>Dairy</em></div>
+      <div class="fdesc">Farm fresh dairy products delivered to your doorstep every morning. Pure, natural, and chemical-free — straight from our farm in Kakinada, Andhra Pradesh.</div>
+      <div class="fsocial">
+        <a href="#" class="fsoc">f</a>
+        <a href="#" class="fsoc">in</a>
+        <a href="https://wa.me/917337432223" class="fsoc" target="_blank">w</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-title">Products</div>
+      <ul class="flinks">
+        <li><a href="#products">Fresh Cow Milk</a></li><li><a href="#products">Fresh Curd</a></li>
+        <li><a href="#products">Desi Ghee</a></li><li><a href="#products">Paneer</a></li>
+        <li><a href="#products">Buttermilk</a></li><li><a href="#products">Khova / Mawa</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fcol-title">Quick Links</div>
+      <ul class="flinks">
+        <li><a href="#home">Home</a></li><li><a href="#subscription">Subscribe</a></li>
+        <li><a href="#about">About Us</a></li><li><a href="#delivery">Delivery Area</a></li>
+        <li><a href="#testimonials">Reviews</a></li><li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fcol-title">Contact</div>
+      <ul class="flinks">
+        <li><a href="tel:+917337432223">+91 73374 32223</a></li>
+        <li><a href="https://wa.me/917337432223" target="_blank">WhatsApp Us</a></li>
+        <li><a href="mailto:pushpakvinay1234@gmail.com">pushpakvinay1234@gmail.com</a></li>
+        <li><a href="#delivery">Pallam Raju Nagar, Kakinada</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="footer-bottom">© 2025 Vijay Dairy. All rights reserved. Pure Milk · Fresh Curd · Desi Ghee · Paneer · Buttermilk · Khova</div>
+  <div class="footer-bottom">
+    <div class="fcopy">© 2025 Vijay Dairy, Kakinada. All rights reserved.</div>
+    <div class="fcopy">Pure Milk · Curd · Ghee · Paneer · Buttermilk · Khova</div>
+  </div>
 </footer>
 
-<!-- WhatsApp Float -->
-<a class="wa-float" href="https://wa.me/917337432223?text=Hello%20Vijay%20Dairy!" target="_blank">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-
-<div class="toast" id="toast">✅ Redirecting to WhatsApp...</div>
+<!-- WA FLOAT -->
+<div class="wafab">
+  <div class="watooltip">Order on WhatsApp</div>
+  <a href="https://wa.me/917337432223?text=Hello%20Vijay%20Dairy!%20I%27m%20interested%20in%20ordering." class="wabtn" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+<div class="toast" id="toast">✅ Opening WhatsApp...</div>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-  function sendEnquiry() {
-    const name = document.getElementById('fname').value || 'Customer';
-    const phone = document.getElementById('fphone').value || '';
-    const product = document.getElementById('fproduct').value || 'dairy products';
-    const msg = `Hello Vijay Dairy! My name is ${name}${phone ? ', phone: ' + phone : ''}. I'm interested in: ${product}.`;
-    const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2500);
-    setTimeout(() => window.open('https://wa.me/917337432223?text=' + encodeURIComponent(msg), '_blank'), 600);
-  }
-
-  window.addEventListener('scroll', () => {
-    let current = '';
-    document.querySelectorAll('section[id]').forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--green)' : '';
-    });
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('hide'),2000));
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('show')}),{threshold:0.1});
+document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+function submitForm(){
+  const n=document.getElementById('fn').value||'Customer';
+  const p=document.getElementById('fp').value||'';
+  const i=document.getElementById('fi').value||'dairy products';
+  const m=document.getElementById('fm').value||'';
+  const txt=`Hello Vijay Dairy! 🥛\n\nName: ${n}${p?'\nPhone: '+p:''}\nInterested in: ${i}${m?'\nMessage: '+m:''}\n\nPlease contact me. Thank you!`;
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+  setTimeout(()=>window.open('https://wa.me/917337432223?text='+encodeURIComponent(txt),'_blank'),700);
+}
+window.addEventListener('scroll',()=>{
+  let c='';
+  document.querySelectorAll('section[id]').forEach(s=>{if(scrollY>=s.offsetTop-100)c=s.id});
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    const active=a.getAttribute('href')==='#'+c;
+    a.style.color=active?'var(--green-b)':'';
+    a.style.fontWeight=active?'500':'';
   });
+});
 </script>
 </body>
 </html>
